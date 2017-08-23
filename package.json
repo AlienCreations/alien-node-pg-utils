@@ -1,0 +1,37 @@
+{
+  "name"            : "alien-node-pg-utils",
+  "version"         : "1.0.0",
+  "description"     : "Helper functions for Postgres on NodeJS",
+  "main"            : "lib/DB.js",
+  "dependencies"    : {
+    "aybabtu" : "*",
+    "ramda"   : "^0.24.x",
+    "q"       : "^2.x.x",
+    "moment"  : "^2.11.2"
+  },
+  "devDependencies" : {
+    "coveralls" : "^2.11.2",
+    "istanbul"  : "^0.3.13",
+    "jasmine"   : "^2.3.1"
+  },
+  "scripts"         : {
+    "test" : "./node_modules/.bin/istanbul cover ./node_modules/.bin/jasmine"
+  },
+  "repository"      : {
+    "type" : "git",
+    "url"  : "https://github.com/aliencreations/alien-node-pg-utils.git"
+  },
+  "keywords"        : [
+    "aliencreations",
+    "api",
+    "util",
+    "node",
+    "ramda"
+  ],
+  "author"          : "Sean Cannon",
+  "license"         : "MIT",
+  "bugs"            : {
+    "url" : "https://github.com/aliencreations/alien-node-pg-utils/issues"
+  },
+  "homepage"        : "https://github.com/aliencreations/alien-node-pg-utils"
+}
