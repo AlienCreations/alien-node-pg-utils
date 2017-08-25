@@ -8,13 +8,11 @@ const constants      = require('../lib/constants'),
 
 const MYSQL_DUPLICATE_ENTRY_ERROR_CODE = 'ER_DUP_ENTRY';
 
-const pgResObj = R.objOf('rows');
-
 const FAKE_ERROR                  = new Error('foobar'),
       FAKE_DUPLICATE_RECORD_ERROR = {code : MYSQL_DUPLICATE_ENTRY_ERROR_CODE, message : 'foo duplicate'},
-      FAKE_RESPONSE_SINGLE        = pgResObj({foo : 'bar'}),
-      FAKE_RESPONSE_SINGLE_ARRAY  = pgResObj([{foo : 'bar'}]),
-      FAKE_RESPONSE_ARRAY         = pgResObj([{foo : 'bar'}, {baz : 'bat'}, {biz : 'buz'}]);
+      FAKE_RESPONSE_EMPTY         = { rowCount : 0, rows : [] },
+      FAKE_RESPONSE_SINGLE_ARRAY  = { rowCount : 1, rows : [{foo : 'bar'}] },
+      FAKE_RESPONSE_ARRAY         = { rowCount : 1, rows : [{foo : 'bar'}, {baz : 'bat'}, {biz : 'buz'}] };
 
 const IS_TRANSACTION_FALSE       = false,
       IS_TRANSACTION_TRUE        = true,
@@ -129,7 +127,7 @@ describe('_queryCallback', () => {
       IS_TRANSACTION_FALSE,
       SINGLE_RETURN_ITEM_FALSE,
       ALLOW_EMPTY_RESPONSE_FALSE
-    )(null, []);
+    )(null, FAKE_RESPONSE_EMPTY);
   });
 
   it('invokes a non-transaction, query() callback with no errors on a single-item array', done => {
@@ -156,7 +154,7 @@ describe('_queryCallback', () => {
     const deferred = Q.defer();
 
     deferred.promise.then(res => {
-      expect(res.data).toEqual(FAKE_RESPONSE_SINGLE.rows);
+      expect(res.data).toEqual(FAKE_RESPONSE_SINGLE_ARRAY.rows);
       expect(FAKE_CONNECTION.release).toHaveBeenCalled();
       done();
     });
@@ -167,7 +165,7 @@ describe('_queryCallback', () => {
       IS_TRANSACTION_FALSE,
       SINGLE_RETURN_ITEM_FALSE,
       ALLOW_EMPTY_RESPONSE_FALSE
-    )(null, FAKE_RESPONSE_SINGLE);
+    )(null, FAKE_RESPONSE_SINGLE_ARRAY);
   });
 
   it('invokes a non-transaction, querySafe() callback with no errors on a multi-item array', done => {
@@ -205,7 +203,7 @@ describe('_queryCallback', () => {
       IS_TRANSACTION_FALSE,
       SINGLE_RETURN_ITEM_FALSE,
       ALLOW_EMPTY_RESPONSE_TRUE
-    )(null, []);
+    )(null, FAKE_RESPONSE_EMPTY);
   });
 
   it('invokes a transaction, querySafe() callback with no errors on an empty response', done => {
@@ -224,7 +222,7 @@ describe('_queryCallback', () => {
       IS_TRANSACTION_TRUE,
       SINGLE_RETURN_ITEM_FALSE,
       ALLOW_EMPTY_RESPONSE_TRUE
-    )(null, []);
+    )(null, FAKE_RESPONSE_EMPTY);
   });
 
 
@@ -252,7 +250,7 @@ describe('_queryCallback', () => {
     const deferred = Q.defer();
 
     deferred.promise.then(res => {
-      expect(res.data).toEqual(FAKE_RESPONSE_SINGLE.rows);
+      expect(res.data).toEqual(FAKE_RESPONSE_SINGLE_ARRAY.rows);
       expect(FAKE_CONNECTION.release).toHaveBeenCalled();
       done();
     });
@@ -263,7 +261,7 @@ describe('_queryCallback', () => {
       IS_TRANSACTION_FALSE,
       SINGLE_RETURN_ITEM_FALSE,
       ALLOW_EMPTY_RESPONSE_TRUE
-    )(null, FAKE_RESPONSE_SINGLE);
+    )(null, FAKE_RESPONSE_SINGLE_ARRAY);
   });
 
 
@@ -302,7 +300,7 @@ describe('_queryCallback', () => {
       IS_TRANSACTION_FALSE,
       SINGLE_RETURN_ITEM_TRUE,
       ALLOW_EMPTY_RESPONSE_FALSE
-    )(null, []);
+    )(null, FAKE_RESPONSE_EMPTY);
   });
 
   it('invokes a non-transaction, lookup() callback with no errors on a single-item array', done => {
@@ -310,7 +308,7 @@ describe('_queryCallback', () => {
     const deferred = Q.defer();
 
     deferred.promise.then(res => {
-      expect(res.data).toEqual(FAKE_RESPONSE_SINGLE.rows);
+      expect(res.data).toEqual(FAKE_RESPONSE_SINGLE_ARRAY.rows[0]);
       expect(FAKE_CONNECTION.release).toHaveBeenCalled();
       done();
     });
@@ -329,7 +327,7 @@ describe('_queryCallback', () => {
     const deferred = Q.defer();
 
     deferred.promise.then(res => {
-      expect(res.data).toEqual(FAKE_RESPONSE_SINGLE.rows);
+      expect(res.data).toEqual(FAKE_RESPONSE_SINGLE_ARRAY.rows[0]);
       expect(FAKE_CONNECTION.release).toHaveBeenCalled();
       done();
     });
@@ -340,7 +338,7 @@ describe('_queryCallback', () => {
       IS_TRANSACTION_FALSE,
       SINGLE_RETURN_ITEM_TRUE,
       ALLOW_EMPTY_RESPONSE_FALSE
-    )(null, FAKE_RESPONSE_SINGLE);
+    )(null, FAKE_RESPONSE_SINGLE_ARRAY);
   });
 
   it('invokes a non-transaction, lookupSafe() callback with no errors on a multi-item array', done => {
@@ -377,7 +375,7 @@ describe('_queryCallback', () => {
       IS_TRANSACTION_FALSE,
       SINGLE_RETURN_ITEM_TRUE,
       ALLOW_EMPTY_RESPONSE_TRUE
-    )(null, []);
+    )(null, FAKE_RESPONSE_EMPTY);
   });
 
   it('invokes a non-transaction, lookupSafe() callback with no errors on a single-item array', done => {
@@ -385,7 +383,7 @@ describe('_queryCallback', () => {
     const deferred = Q.defer();
 
     deferred.promise.then(res => {
-      expect(res.data).toEqual(FAKE_RESPONSE_SINGLE.rows);
+      expect(res.data).toEqual(FAKE_RESPONSE_SINGLE_ARRAY.rows[0]);
       expect(FAKE_CONNECTION.release).toHaveBeenCalled();
       done();
     });
@@ -404,7 +402,7 @@ describe('_queryCallback', () => {
     const deferred = Q.defer();
 
     deferred.promise.then(res => {
-      expect(res.data).toEqual(FAKE_RESPONSE_SINGLE.rows);
+      expect(res.data).toEqual(FAKE_RESPONSE_SINGLE_ARRAY.rows[0]);
       expect(FAKE_CONNECTION.release).toHaveBeenCalled();
       done();
     });
@@ -415,7 +413,7 @@ describe('_queryCallback', () => {
       IS_TRANSACTION_FALSE,
       SINGLE_RETURN_ITEM_TRUE,
       ALLOW_EMPTY_RESPONSE_TRUE
-    )(null, FAKE_RESPONSE_SINGLE);
+    )(null, FAKE_RESPONSE_SINGLE_ARRAY);
   });
 
   it('handles a duplicate-record error no differently than other errors', done => {
