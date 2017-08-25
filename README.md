@@ -19,10 +19,10 @@ $ npm test
 
 #### query()
 Make a SQL query in which you expect zero or more results. Returns a promise which
-either resolves to an array containing found records (as objects) or rejects if no records found. 
+either resolves to an object containing an array (data) containing found records (as objects) or rejects if no records found. 
 
 #### querySafe()
-Same as query but resolves an empty array if no records found.
+Same as query but resolves with an empty array if no records found.
 
 ##### Suggested model usage: 
 ```js
@@ -63,7 +63,7 @@ module.exports = getAccountsByStatus;
 
 const getAccountsByStatus = require('../models/getAccountsByStatus');
 
-getAccountsByStatus('active').then(accounts => {
+getAccountsByStatus('active').then(({ data : accounts }) => {
     // handle array of accounts here
   })
   .catch(err => {
@@ -78,7 +78,7 @@ getAccountsByStatus('active').then(accounts => {
 
 const getAccountsByStatus = require('../models/getAccountsByStatus');
 
-getAccountsByStatus('active').then(maybeAccounts => {
+getAccountsByStatus('active').then(({ data : maybeAccounts }) => {
     // handle array of accounts or empty array here
   })
   .catch(err => {
@@ -89,10 +89,10 @@ getAccountsByStatus('active').then(maybeAccounts => {
 
 #### lookup()
 Make a SQL query in which you expect zero or one result. Returns a promise which
-either resolves to an object matching the row schema or rejects if no records found. 
+either resolves to an object containing a matching row (data) or rejects if no records found. 
 
 #### lookupSafe()
-Same as lookup, but resolves `undefined` if no records are found. 
+Same as lookup, but resolves with `{data:undefined ...}` if no records are found. 
 
 ```js
 
@@ -133,7 +133,7 @@ module.exports = getAccountById;
 const getAccountById = require('../models/getAccountById');
 
 
-getAccountById(1234).then(account => {
+getAccountById(1234).then(({ data : account }) => {
     // handle account object here
   })
   .catch(err => {
@@ -149,7 +149,7 @@ getAccountById(1234).then(account => {
 const getAccountById = require('../models/getAccountById');
 
 
-getAccountById(1234).then(maybeAccount => {
+getAccountById(1234).then(({ data : maybeAccount }) => {
     // handle account object or undefined here
   })
   .catch(err => {

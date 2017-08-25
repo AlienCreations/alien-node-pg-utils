@@ -99,7 +99,7 @@ describe('_queryCallback', () => {
     const deferred = Q.defer();
 
     deferred.promise.then(res => {
-      expect(res).toEqual(FAKE_RESPONSE_ARRAY.rows);
+      expect(res.data).toEqual(FAKE_RESPONSE_ARRAY.rows);
       expect(FAKE_CONNECTION.release).toHaveBeenCalled();
       done();
     });
@@ -137,7 +137,7 @@ describe('_queryCallback', () => {
     const deferred = Q.defer();
 
     deferred.promise.then(res => {
-      expect(res).toEqual(FAKE_RESPONSE_SINGLE_ARRAY.rows);
+      expect(res.data).toEqual(FAKE_RESPONSE_SINGLE_ARRAY.rows);
       expect(FAKE_CONNECTION.release).toHaveBeenCalled();
       done();
     });
@@ -156,7 +156,7 @@ describe('_queryCallback', () => {
     const deferred = Q.defer();
 
     deferred.promise.then(res => {
-      expect(res).toEqual(FAKE_RESPONSE_SINGLE.rows);
+      expect(res.data).toEqual(FAKE_RESPONSE_SINGLE.rows);
       expect(FAKE_CONNECTION.release).toHaveBeenCalled();
       done();
     });
@@ -175,7 +175,7 @@ describe('_queryCallback', () => {
     const deferred = Q.defer();
 
     deferred.promise.then(res => {
-      expect(res).toEqual(FAKE_RESPONSE_ARRAY.rows);
+      expect(res.data).toEqual(FAKE_RESPONSE_ARRAY.rows);
       expect(FAKE_CONNECTION.release).toHaveBeenCalled();
       done();
     });
@@ -194,7 +194,7 @@ describe('_queryCallback', () => {
     const deferred = Q.defer();
 
     deferred.promise.then(res => {
-      expect(res).toEqual([]);
+      expect(res.data).toEqual([]);
       expect(FAKE_CONNECTION.release).toHaveBeenCalled();
       done();
     });
@@ -213,7 +213,7 @@ describe('_queryCallback', () => {
     const deferred = Q.defer();
 
     deferred.promise.then(res => {
-      expect(res).toEqual([]);
+      expect(res.data).toEqual([]);
       expect(FAKE_CONNECTION.release).not.toHaveBeenCalled();
       done();
     });
@@ -233,7 +233,7 @@ describe('_queryCallback', () => {
     const deferred = Q.defer();
 
     deferred.promise.then(res => {
-      expect(res).toEqual(FAKE_RESPONSE_SINGLE_ARRAY.rows);
+      expect(res.data).toEqual(FAKE_RESPONSE_SINGLE_ARRAY.rows);
       expect(FAKE_CONNECTION.release).toHaveBeenCalled();
       done();
     });
@@ -252,7 +252,7 @@ describe('_queryCallback', () => {
     const deferred = Q.defer();
 
     deferred.promise.then(res => {
-      expect(res).toEqual(FAKE_RESPONSE_SINGLE.rows);
+      expect(res.data).toEqual(FAKE_RESPONSE_SINGLE.rows);
       expect(FAKE_CONNECTION.release).toHaveBeenCalled();
       done();
     });
@@ -272,7 +272,7 @@ describe('_queryCallback', () => {
     const deferred = Q.defer();
 
     deferred.promise.then(res => {
-      expect(res).toEqual(FAKE_RESPONSE_ARRAY.rows);
+      expect(res.data).toEqual(FAKE_RESPONSE_ARRAY.rows);
       expect(FAKE_CONNECTION.release).toHaveBeenCalled();
       done();
     });
@@ -310,7 +310,7 @@ describe('_queryCallback', () => {
     const deferred = Q.defer();
 
     deferred.promise.then(res => {
-      expect(res).toEqual(FAKE_RESPONSE_SINGLE.rows);
+      expect(res.data).toEqual(FAKE_RESPONSE_SINGLE.rows);
       expect(FAKE_CONNECTION.release).toHaveBeenCalled();
       done();
     });
@@ -329,7 +329,7 @@ describe('_queryCallback', () => {
     const deferred = Q.defer();
 
     deferred.promise.then(res => {
-      expect(res).toEqual(FAKE_RESPONSE_SINGLE.rows);
+      expect(res.data).toEqual(FAKE_RESPONSE_SINGLE.rows);
       expect(FAKE_CONNECTION.release).toHaveBeenCalled();
       done();
     });
@@ -348,7 +348,7 @@ describe('_queryCallback', () => {
     const deferred = Q.defer();
 
     deferred.promise.then(res => {
-      expect(res).toEqual(FAKE_RESPONSE_ARRAY.rows);
+      expect(res.data).toEqual(FAKE_RESPONSE_ARRAY.rows);
       expect(FAKE_CONNECTION.release).toHaveBeenCalled();
       done();
     });
@@ -367,7 +367,7 @@ describe('_queryCallback', () => {
     const deferred = Q.defer();
 
     deferred.promise.then(res => {
-      expect(res).toEqual(undefined);
+      expect(res.data).toEqual(undefined);
       done();
     });
 
@@ -385,7 +385,7 @@ describe('_queryCallback', () => {
     const deferred = Q.defer();
 
     deferred.promise.then(res => {
-      expect(res).toEqual(FAKE_RESPONSE_SINGLE.rows);
+      expect(res.data).toEqual(FAKE_RESPONSE_SINGLE.rows);
       expect(FAKE_CONNECTION.release).toHaveBeenCalled();
       done();
     });
@@ -404,7 +404,7 @@ describe('_queryCallback', () => {
     const deferred = Q.defer();
 
     deferred.promise.then(res => {
-      expect(res).toEqual(FAKE_RESPONSE_SINGLE.rows);
+      expect(res.data).toEqual(FAKE_RESPONSE_SINGLE.rows);
       expect(FAKE_CONNECTION.release).toHaveBeenCalled();
       done();
     });

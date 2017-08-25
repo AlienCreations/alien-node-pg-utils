@@ -1,6 +1,6 @@
 {
   "name"            : "alien-node-pg-utils",
-  "version"         : "1.1.5",
+  "version"         : "1.2.0",
   "description"     : "Helper functions for Postgres on NodeJS",
   "main"            : "lib/DB.js",
   "dependencies"    : {
