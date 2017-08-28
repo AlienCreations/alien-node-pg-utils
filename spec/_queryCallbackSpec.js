@@ -1,15 +1,14 @@
 'use strict';
 
-const Q = require('q'),
-      R = require('ramda');
+const Q = require('q');
 
 const constants      = require('../lib/constants'),
       _queryCallback = require('../lib/methods/_queryCallback');
 
-const MYSQL_DUPLICATE_ENTRY_ERROR_CODE = 'ER_DUP_ENTRY';
+const POSTGRES_DUPLICATE_ENTRY_ERROR_CODE = '23505';
 
 const FAKE_ERROR                  = new Error('foobar'),
-      FAKE_DUPLICATE_RECORD_ERROR = {code : MYSQL_DUPLICATE_ENTRY_ERROR_CODE, message : 'foo duplicate'},
+      FAKE_DUPLICATE_RECORD_ERROR = { code : POSTGRES_DUPLICATE_ENTRY_ERROR_CODE, message : 'foo duplicate' },
       FAKE_RESPONSE_EMPTY         = { rowCount : 0, rows : [] },
       FAKE_RESPONSE_SINGLE_ARRAY  = { rowCount : 1, rows : [{foo : 'bar'}] },
       FAKE_RESPONSE_ARRAY         = { rowCount : 1, rows : [{foo : 'bar'}, {baz : 'bat'}, {biz : 'buz'}] };
